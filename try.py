@@ -1,6 +1,6 @@
 # from classification import model
-import model
-import get_mnist
+from classification import model
+from dataset import get_mnist
 import os
 import time
 from sklearn import metrics
@@ -25,13 +25,10 @@ if __name__ == "__main__":
         print '************%s************' % classifier
         start_time = time.time()
 
-        model = classifiers[classifier](pqzh_data['train_data'], pqzh_data['train_label'])
+        model = classifiers[classifier](
+            pqzh_data['train_data'], pqzh_data['train_label'])
         print 'training took %fs!' % (time.time() - start_time)
 
         predict = model.predict(pqzh_data['valid_data'])
         accuracy = metrics.accuracy_score(pqzh_data['valid_label'], predict)
         print 'accuracy: %.2f%%' % (100 * accuracy)
-
-
-
-
